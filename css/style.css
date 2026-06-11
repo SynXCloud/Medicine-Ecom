@@ -583,4 +583,11 @@ h1, h2, h3, h4, h5, h6 {
     .navbar-collapse .dropdown-header {
         padding-left: 24px !important;
     }
+
+    .nav-quick-actions-row {
+        border-top: 1px solid var(--border-color);
+        width: 100%;
+        padding-top: 16px;
+        margin-top: 12px;
+    }
 }

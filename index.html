@@ -55,53 +55,56 @@
                         <a class="nav-link px-3" href="#why-digital"><span class="badge why-digital-badge me-1">Pitch</span> Why Digital?</a>
                     </li>
                     
-                    <!-- Shopping Cart Icon -->
-                    <li class="nav-item">
-                        <a class="nav-link px-3 position-relative" href="#cart" id="cart-nav-btn">
-                            <i class="fa-solid fa-cart-shopping fa-lg"></i>
-                            <span class="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-danger d-none" id="cart-badge-count">
-                                0
-                            </span>
-                        </a>
-                    </li>
+                    <!-- Quick Actions Group (horizontal bar on mobile and desktop) -->
+                    <li class="nav-item d-flex align-items-center justify-content-center gap-3 w-100 w-lg-auto nav-quick-actions-row">
+                        <!-- Shopping Cart Icon -->
+                        <div class="position-relative">
+                            <a class="nav-link px-2 px-lg-3 position-relative" href="#cart" id="cart-nav-btn">
+                                <i class="fa-solid fa-cart-shopping fa-lg"></i>
+                                <span class="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-danger d-none" id="cart-badge-count">
+                                    0
+                                </span>
+                            </a>
+                        </div>
 
-                    <!-- Notifications Dropdown -->
-                    <li class="nav-item dropdown">
-                        <a class="nav-link px-3 position-relative" href="#" id="notif-dropdown-btn" data-bs-toggle="dropdown" aria-expanded="false">
-                            <i class="fa-solid fa-bell fa-lg"></i>
-                            <span class="position-absolute top-0 start-100 translate-middle p-1 bg-danger border border-light rounded-circle d-none" id="notif-badge-dot"></span>
-                        </a>
-                        <ul class="dropdown-menu dropdown-menu-end p-2 border-0 shadow-lg" id="notif-list-dropdown" style="min-width: 320px; border-radius: 12px;">
-                            <li><h6 class="dropdown-header d-flex justify-content-between align-items-center">Notifications <button class="btn btn-sm btn-link text-primary p-0" id="btn-clear-notifs">Mark Read</button></h6></li>
-                            <li><hr class="dropdown-divider"></li>
-                            <div id="notif-items-container" style="max-height: 250px; overflow-y: auto;">
-                                <!-- Dynamically loaded notifications -->
-                            </div>
-                        </ul>
-                    </li>
+                        <!-- Notifications Dropdown -->
+                        <div class="dropdown">
+                            <a class="nav-link px-2 px-lg-3 position-relative" href="#" id="notif-dropdown-btn" data-bs-toggle="dropdown" aria-expanded="false">
+                                <i class="fa-solid fa-bell fa-lg"></i>
+                                <span class="position-absolute top-0 start-100 translate-middle p-1 bg-danger border border-light rounded-circle d-none" id="notif-badge-dot"></span>
+                            </a>
+                            <ul class="dropdown-menu dropdown-menu-end p-2 border-0 shadow-lg" id="notif-list-dropdown" style="min-width: 320px; border-radius: 12px;">
+                                <li><h6 class="dropdown-header d-flex justify-content-between align-items-center">Notifications <button class="btn btn-sm btn-link text-primary p-0" id="btn-clear-notifs">Mark Read</button></h6></li>
+                                <li><hr class="dropdown-divider"></li>
+                                <div id="notif-items-container" style="max-height: 250px; overflow-y: auto;">
+                                    <!-- Dynamically loaded notifications -->
+                                </div>
+                            </ul>
+                        </div>
 
-                    <!-- Customer Profile / Demo Picker -->
-                    <li class="nav-item dropdown">
-                        <a class="nav-link dropdown-toggle d-flex align-items-center gap-2" href="#" id="profileDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-                            <img src="https://api.dicebear.com/7.x/adventurer/svg?seed=John" id="nav-user-avatar" class="rounded-circle border" width="32" height="32" alt="Avatar">
-                            <span class="d-none d-xl-inline text-secondary fw-semibold" id="nav-user-name">Loading...</span>
-                        </a>
-                        <ul class="dropdown-menu dropdown-menu-end border-0 shadow-lg" aria-labelledby="profileDropdown" style="border-radius: 12px;">
-                            <li><a class="dropdown-item py-2" href="#dashboard"><i class="fa-solid fa-circle-user me-2 text-muted"></i> Dashboard</a></li>
-                            <li><a class="dropdown-item py-2" href="#admin"><i class="fa-solid fa-screwdriver-wrench me-2 text-muted"></i> Admin Portal</a></li>
-                            <li><hr class="dropdown-divider"></li>
-                            <li><h6 class="dropdown-header">Demo: Switch Customer</h6></li>
-                            <div id="demo-customer-picker" style="max-height: 150px; overflow-y: auto;">
-                                <!-- Populated dynamically with users to demonstrate multi-tenant/account features -->
-                            </div>
-                        </ul>
-                    </li>
+                        <!-- Customer Profile / Demo Picker -->
+                        <div class="dropdown">
+                            <a class="nav-link dropdown-toggle d-flex align-items-center gap-2 px-2 px-lg-3" href="#" id="profileDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                                <img src="https://api.dicebear.com/7.x/adventurer/svg?seed=John" id="nav-user-avatar" class="rounded-circle border" width="32" height="32" alt="Avatar">
+                                <span class="d-none d-xl-inline text-secondary fw-semibold" id="nav-user-name">Loading...</span>
+                            </a>
+                            <ul class="dropdown-menu dropdown-menu-end border-0 shadow-lg" aria-labelledby="profileDropdown" style="border-radius: 12px;">
+                                <li><a class="dropdown-item py-2" href="#dashboard"><i class="fa-solid fa-circle-user me-2 text-muted"></i> Dashboard</a></li>
+                                <li><a class="dropdown-item py-2" href="#admin"><i class="fa-solid fa-screwdriver-wrench me-2 text-muted"></i> Admin Portal</a></li>
+                                <li><hr class="dropdown-divider"></li>
+                                <li><h6 class="dropdown-header">Demo: Switch Customer</h6></li>
+                                <div id="demo-customer-picker" style="max-height: 150px; overflow-y: auto;">
+                                    <!-- Populated dynamically with users to demonstrate multi-tenant/account features -->
+                                </div>
+                            </ul>
+                        </div>
 
-                    <!-- Dark Mode Toggle -->
-                    <li class="nav-item">
-                        <button class="theme-toggle-btn ms-2" id="theme-toggle" title="Toggle Light/Dark Theme">
-                            <i class="fa-solid fa-moon"></i>
-                        </button>
+                        <!-- Dark Mode Toggle -->
+                        <div class="ms-lg-2">
+                            <button class="theme-toggle-btn" id="theme-toggle" title="Toggle Light/Dark Theme">
+                                <i class="fa-solid fa-moon"></i>
+                            </button>
+                        </div>
                     </li>
                 </ul>
             </div>
