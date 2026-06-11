@@ -1,0 +1,1278 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="light">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CureSync - Online Pharmacy & Business Intelligence</title>
+    <meta name="description" content="Seamless pharmacy delivery and digital automation system by SynXCloud for CureSync. Order prescription & OTC drugs online.">
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <!-- Bootstrap 5 CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <!-- Custom Style -->
+    <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+
+    <!-- --- NAVIGATION BAR --- -->
+    <nav class="navbar navbar-expand-lg glass-nav py-3">
+        <div class="container">
+            <a class="navbar-brand d-flex align-items-center gap-2" href="#home">
+                <i class="fa-solid fa-prescription-bottle-medical fa-2xl text-success"></i>
+                <span class="fw-bold fs-4 tracking-tight text-primary">Cure<span class="text-success">Sync</span></span>
+            </a>
+            
+            <button class="navbar-toggler border-0" type="button" data-bs-toggle="collapse" data-bs-target="#mainNavbar" aria-controls="mainNavbar" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            
+            <div class="collapse navbar-collapse" id="mainNavbar">
+                <!-- Autocomplete Search Bar -->
+                <div class="navbar-nav mx-auto my-3 my-lg-0">
+                    <div class="search-container">
+                        <div class="input-group">
+                            <span class="input-group-text bg-transparent border-end-0 text-muted"><i class="fa-solid fa-magnifying-glass"></i></span>
+                            <input type="text" id="nav-search-input" class="form-control border-start-0 border-end-0 bg-transparent py-2" placeholder="Search medicines, supplements..." autocomplete="off">
+                            <button class="btn btn-outline-secondary border-start-0 text-muted" type="button" id="btn-voice-search" title="Voice Search">
+                                <i class="fa-solid fa-microphone"></i>
+                            </button>
+                        </div>
+                        <div id="autocomplete-results" class="autocomplete-dropdown"></div>
+                    </div>
+                </div>
+
+                <ul class="navbar-nav align-items-center gap-2">
+                    <li class="nav-item">
+                        <a class="nav-link px-3" href="#catalog"><i class="fa-solid fa-tablets me-1"></i> Catalog</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link px-3" href="#prescription"><i class="fa-solid fa-file-prescription me-1"></i> Upload Rx</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link px-3" href="#why-digital"><span class="badge why-digital-badge me-1">Pitch</span> Why Digital?</a>
+                    </li>
+                    
+                    <!-- Shopping Cart Icon -->
+                    <li class="nav-item">
+                        <a class="nav-link px-3 position-relative" href="#cart" id="cart-nav-btn">
+                            <i class="fa-solid fa-cart-shopping fa-lg"></i>
+                            <span class="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-danger d-none" id="cart-badge-count">
+                                0
+                            </span>
+                        </a>
+                    </li>
+
+                    <!-- Notifications Dropdown -->
+                    <li class="nav-item dropdown">
+                        <a class="nav-link px-3 position-relative" href="#" id="notif-dropdown-btn" data-bs-toggle="dropdown" aria-expanded="false">
+                            <i class="fa-solid fa-bell fa-lg"></i>
+                            <span class="position-absolute top-0 start-100 translate-middle p-1 bg-danger border border-light rounded-circle d-none" id="notif-badge-dot"></span>
+                        </a>
+                        <ul class="dropdown-menu dropdown-menu-end p-2 border-0 shadow-lg" id="notif-list-dropdown" style="min-width: 320px; border-radius: 12px;">
+                            <li><h6 class="dropdown-header d-flex justify-content-between align-items-center">Notifications <button class="btn btn-sm btn-link text-primary p-0" id="btn-clear-notifs">Mark Read</button></h6></li>
+                            <li><hr class="dropdown-divider"></li>
+                            <div id="notif-items-container" style="max-height: 250px; overflow-y: auto;">
+                                <!-- Dynamically loaded notifications -->
+                            </div>
+                        </ul>
+                    </li>
+
+                    <!-- Customer Profile / Demo Picker -->
+                    <li class="nav-item dropdown">
+                        <a class="nav-link dropdown-toggle d-flex align-items-center gap-2" href="#" id="profileDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                            <img src="https://api.dicebear.com/7.x/adventurer/svg?seed=John" id="nav-user-avatar" class="rounded-circle border" width="32" height="32" alt="Avatar">
+                            <span class="d-none d-xl-inline text-secondary fw-semibold" id="nav-user-name">Loading...</span>
+                        </a>
+                        <ul class="dropdown-menu dropdown-menu-end border-0 shadow-lg" aria-labelledby="profileDropdown" style="border-radius: 12px;">
+                            <li><a class="dropdown-item py-2" href="#dashboard"><i class="fa-solid fa-circle-user me-2 text-muted"></i> Dashboard</a></li>
+                            <li><a class="dropdown-item py-2" href="#admin"><i class="fa-solid fa-screwdriver-wrench me-2 text-muted"></i> Admin Portal</a></li>
+                            <li><hr class="dropdown-divider"></li>
+                            <li><h6 class="dropdown-header">Demo: Switch Customer</h6></li>
+                            <div id="demo-customer-picker" style="max-height: 150px; overflow-y: auto;">
+                                <!-- Populated dynamically with users to demonstrate multi-tenant/account features -->
+                            </div>
+                        </ul>
+                    </li>
+
+                    <!-- Dark Mode Toggle -->
+                    <li class="nav-item">
+                        <button class="theme-toggle-btn ms-2" id="theme-toggle" title="Toggle Light/Dark Theme">
+                            <i class="fa-solid fa-moon"></i>
+                        </button>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+    <!-- --- MAIN CONTAINER (VIEWS CONTAINER) --- -->
+    <main>
+
+        <!-- ==============================================
+             1. HOME PAGE VIEW
+             ============================================== -->
+        <section id="view-home" class="app-view active-view">
+            <!-- Hero Section -->
+            <div class="hero-section text-center text-lg-start">
+                <div class="container">
+                    <div class="row align-items-center g-5">
+                        <div class="col-lg-6">
+                            <span class="badge bg-success-subtle text-success border border-success-subtle px-3 py-2 rounded-pill fw-semibold mb-3">WhatsApp to Digital Transformation</span>
+                            <h1 class="display-4 fw-extrabold mb-3 lh-1">Say Goodbye to Messy WhatsApp Medicine Ordering</h1>
+                            <p class="lead text-secondary mb-4">Transform your ordering experience with CureSync. Secure prescription uploads, instant order verification, loyalty cashbacks, and lightning-fast delivery.</p>
+                            <div class="d-flex flex-wrap justify-content-center justify-content-lg-start gap-3">
+                                <a href="#catalog" class="btn btn-primary btn-lg px-4 rounded-pill shadow-sm"><i class="fa-solid fa-prescription-bottle-medical me-2"></i> Browse Catalog</a>
+                                <a href="#prescription" class="btn btn-outline-secondary btn-lg px-4 rounded-pill"><i class="fa-solid fa-cloud-arrow-up me-2"></i> Upload Prescription</a>
+                            </div>
+                            <!-- Mini stats -->
+                            <div class="row mt-5 pt-3 border-top g-3">
+                                <div class="col-4">
+                                    <h3 class="fw-bold text-success mb-0" id="hero-stat-meds">50+</h3>
+                                    <small class="text-secondary">Medicines Stocked</small>
+                                </div>
+                                <div class="col-4">
+                                    <h3 class="fw-bold text-primary mb-0" id="hero-stat-delivery">&lt; 2 hrs</h3>
+                                    <small class="text-secondary">Express Delivery</small>
+                                </div>
+                                <div class="col-4">
+                                    <h3 class="fw-bold text-info mb-0">100%</h3>
+                                    <small class="text-secondary">AI Recommendation</small>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-lg-6 text-center position-relative">
+                            <div class="py-5">
+                                <i class="fa-solid fa-shield-halved text-success position-absolute" style="font-size: 4rem; top: 10%; right: 15%; opacity: 0.15; animation: float 6s ease-in-out infinite;"></i>
+                                <i class="fa-solid fa-heart-pulse text-primary position-absolute" style="font-size: 5rem; bottom: 10%; left: 10%; opacity: 0.15; animation: float 6s ease-in-out infinite 2s;"></i>
+                                <!-- A gorgeous SVG illustration container representing a medicine cabinet/e-com -->
+                                <div class="custom-card p-4 shadow-lg mx-auto" style="max-width: 450px; border-radius: 24px; background: rgba(var(--bg-surface-rgb), 0.95);">
+                                    <div class="d-flex justify-content-between align-items-center mb-4">
+                                        <div class="d-flex align-items-center gap-2">
+                                            <span class="p-2 bg-success-subtle text-success rounded-circle"><i class="fa-solid fa-bolt"></i></span>
+                                            <span class="fw-bold text-secondary">Quick Refill</span>
+                                        </div>
+                                        <span class="badge bg-primary rounded-pill">Active Patient</span>
+                                    </div>
+                                    <div class="text-start mb-4">
+                                        <h5 class="fw-bold text-primary mb-1">Amoxicillin 500mg</h5>
+                                        <small class="text-secondary"><i class="fa-regular fa-clock me-1"></i> Next dosage: 8:00 PM (1 capsule)</small>
+                                    </div>
+                                    <div class="progress mb-4" style="height: 8px;">
+                                        <div class="progress-bar bg-success" role="progressbar" style="width: 75%" aria-valuenow="75" aria-valuemin="0" aria-valuemax="100"></div>
+                                    </div>
+                                    <div class="d-flex justify-content-between align-items-center pt-3 border-top">
+                                        <div>
+                                            <span class="fs-4 fw-extrabold">$18.50</span>
+                                            <span class="text-muted">/ 30 caps</span>
+                                        </div>
+                                        <button class="btn btn-success rounded-pill px-4 btn-sm" onclick="CureSyncStore.addToCart('med-rx-01')">
+                                            <i class="fa-solid fa-rotate-right me-1"></i> Reorder Now
+                                        </button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Categories Section -->
+            <div class="container my-5 py-5">
+                <div class="text-center mb-5">
+                    <h2 class="display-6 fw-bold">Shop by Category</h2>
+                    <p class="text-secondary mx-auto" style="max-width: 500px;">Find your health and wellness products instantly across our organized departments.</p>
+                </div>
+                <div class="row g-4 justify-content-center">
+                    <div class="col-md-3 col-sm-6">
+                        <a href="#catalog" onclick="window.catalogCategoryFilter='Prescription'" class="text-decoration-none">
+                            <div class="custom-card p-4 text-center">
+                                <div class="fs-1 text-danger mb-3"><i class="fa-solid fa-file-prescription"></i></div>
+                                <h5 class="fw-bold text-primary">Prescription</h5>
+                                <p class="text-secondary small mb-0">Requires valid doctor's prescription upload</p>
+                            </div>
+                        </a>
+                    </div>
+                    <div class="col-md-3 col-sm-6">
+                        <a href="#catalog" onclick="window.catalogCategoryFilter='OTC'" class="text-decoration-none">
+                            <div class="custom-card p-4 text-center">
+                                <div class="fs-1 text-primary mb-3"><i class="fa-solid fa-tablets"></i></div>
+                                <h5 class="fw-bold text-primary">OTC Drugs</h5>
+                                <p class="text-secondary small mb-0">Over-the-counter painkillers & cold remedies</p>
+                            </div>
+                        </a>
+                    </div>
+                    <div class="col-md-3 col-sm-6">
+                        <a href="#catalog" onclick="window.catalogCategoryFilter='Wellness'" class="text-decoration-none">
+                            <div class="custom-card p-4 text-center">
+                                <div class="fs-1 text-success mb-3"><i class="fa-solid fa-leaf"></i></div>
+                                <h5 class="fw-bold text-primary">Wellness</h5>
+                                <p class="text-secondary small mb-0">Vitamins, daily supplements, & herbals</p>
+                            </div>
+                        </a>
+                    </div>
+                    <div class="col-md-3 col-sm-6">
+                        <a href="#catalog" onclick="window.catalogCategoryFilter='Personal Care'" class="text-decoration-none">
+                            <div class="custom-card p-4 text-center">
+                                <div class="fs-1 text-info mb-3"><i class="fa-solid fa-pump-soap"></i></div>
+                                <h5 class="fw-bold text-primary">Personal Care</h5>
+                                <p class="text-secondary small mb-0">Dermacare, hygiene, & cosmetic needs</p>
+                            </div>
+                        </a>
+                    </div>
+                </div>
+            </div>
+
+            <!-- AI Recommendation & Autocomplete Promo Widget -->
+            <div class="bg-light-subtle border-top border-bottom py-5">
+                <div class="container my-4">
+                    <div class="row align-items-center g-5">
+                        <div class="col-lg-6">
+                            <div class="badge bg-primary-subtle text-primary border border-primary-subtle px-3 py-2 rounded-pill fw-semibold mb-3">
+                                <i class="fa-solid fa-brain me-1"></i> AI-Powered Alternatives
+                            </div>
+                            <h2 class="fw-bold">Smart Alternative Finder</h2>
+                            <p class="text-secondary">Worried about medicine prices or brand shortage? Our platform automatically checks for generic alternative formulations with the exact same active ingredients, helping you save up to 70% instantly.</p>
+                            
+                            <div class="custom-card p-4 bg-surface mt-4 border-start border-success border-4 shadow-sm" style="border-radius: 12px;">
+                                <div class="row g-3 align-items-center">
+                                    <div class="col-sm-5">
+                                        <p class="text-muted small mb-1">Brand Name Added</p>
+                                        <h6 class="fw-bold mb-0">Lipitor 20mg <span class="badge bg-danger-subtle text-danger">Rx</span></h6>
+                                        <span class="fs-5 fw-bold">$24.90</span>
+                                    </div>
+                                    <div class="col-sm-2 text-center text-muted">
+                                        <i class="fa-solid fa-circle-arrow-right fa-2xl"></i>
+                                    </div>
+                                    <div class="col-sm-5">
+                                        <p class="text-success small mb-1"><i class="fa-solid fa-sparkles me-1"></i> Generic Recommendation</p>
+                                        <h6 class="fw-bold mb-0 text-success">Atorvastatin 20mg</h6>
+                                        <span class="fs-5 fw-bold text-success">$12.45</span>
+                                        <p class="text-muted small mb-0">(Save 50% / Same Formula)</p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-lg-6">
+                            <div class="custom-card p-4">
+                                <h4 class="fw-bold mb-3"><i class="fa-solid fa-wand-magic-sparkles text-success me-2"></i> Try AI Diagnosis Suggestion</h4>
+                                <p class="text-secondary small">Enter symptoms or medical terms below to test our smart medicine discovery engine.</p>
+                                <div class="mb-3">
+                                    <label for="ai-input" class="form-label fw-semibold">What are you feeling today?</label>
+                                    <input type="text" id="ai-input" class="form-control" placeholder="e.g. Cough, Fever, Muscle ache, Allergy...">
+                                </div>
+                                <button class="btn btn-primary w-100 rounded-pill" id="btn-ai-query">Find Suitable Medicines</button>
+                                <div class="mt-3 d-none" id="ai-suggestion-result">
+                                    <hr>
+                                    <h6 class="fw-bold text-secondary">Recommended Solutions:</h6>
+                                    <div class="d-flex flex-column gap-2" id="ai-suggestions-list">
+                                        <!-- recommendations -->
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Featured Products -->
+            <div class="container my-5 py-5">
+                <div class="d-flex justify-content-between align-items-end mb-4">
+                    <div>
+                        <h2 class="display-6 fw-bold">Popular Medicines</h2>
+                        <p class="text-secondary mb-0">Top-ordered remedies in CureSync dashboard.</p>
+                    </div>
+                    <a href="#catalog" class="btn btn-outline-primary rounded-pill px-4">View All <i class="fa-solid fa-chevron-right ms-1"></i></a>
+                </div>
+                <div class="row g-4" id="featured-medicines-grid">
+                    <!-- Loaded dynamically via js/app.js -->
+                </div>
+            </div>
+
+            <!-- Testimonials -->
+            <div class="bg-light-subtle py-5 border-top">
+                <div class="container my-5">
+                    <h2 class="display-6 fw-bold text-center mb-5">What CureSync Patients Say</h2>
+                    <div class="row g-4">
+                        <div class="col-md-4">
+                            <div class="custom-card p-4 h-100 d-flex flex-column justify-content-between">
+                                <p class="text-secondary italic">"Ordering via WhatsApp used to take hours of back-and-forth matching prescription photos. With CureSync web portal, I uploaded my prescription, checked out in 2 minutes, and got delivery within the hour!"</p>
+                                <div class="d-flex align-items-center gap-3 mt-4">
+                                    <img src="https://api.dicebear.com/7.x/pixel-art/svg?seed=Aria" class="rounded-circle" width="40" height="40" alt="patient">
+                                    <div>
+                                        <h6 class="fw-bold mb-0">Aria Martinez</h6>
+                                        <small class="text-muted">Prescription Patient</small>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-4">
+                            <div class="custom-card p-4 h-100 d-flex flex-column justify-content-between">
+                                <p class="text-secondary italic">"I love the loyalty point system. Earning cashback points on my daily health supplements helps me save big on my monthly refills. The dark mode is extremely comforting at night!"</p>
+                                <div class="d-flex align-items-center gap-3 mt-4">
+                                    <img src="https://api.dicebear.com/7.x/pixel-art/svg?seed=Dev" class="rounded-circle" width="40" height="40" alt="patient">
+                                    <div>
+                                        <h6 class="fw-bold mb-0">Dev Sharma</h6>
+                                        <small class="text-muted">Wellness Member</small>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-4">
+                            <div class="custom-card p-4 h-100 d-flex flex-column justify-content-between">
+                                <p class="text-secondary italic">"The order tracking screen was incredible. I watched my status shift from Verified to Packed, then Out for Delivery in real-time. It completely removes the anxiety of getting critical meds."</p>
+                                <div class="d-flex align-items-center gap-3 mt-4">
+                                    <img src="https://api.dicebear.com/7.x/pixel-art/svg?seed=Jessica" class="rounded-circle" width="40" height="40" alt="patient">
+                                    <div>
+                                        <h6 class="fw-bold mb-0">Jessica Taylor</h6>
+                                        <small class="text-muted">Chronic Refills Patient</small>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Delivery coverage map section -->
+            <div class="container my-5 py-5 text-center">
+                <div class="mx-auto" style="max-width: 600px;">
+                    <h2 class="fw-bold mb-3"><i class="fa-solid fa-map-location-dot text-success me-2"></i> Fast Delivery Coverage</h2>
+                    <p class="text-secondary">We deliver all across New York City and adjacent suburbs. Check your area availability by keying in your ZIP below.</p>
+                    <div class="input-group mb-4 shadow-sm mx-auto" style="max-width: 400px;">
+                        <input type="text" id="delivery-zip-input" class="form-control py-2" placeholder="Enter Zip Code (e.g. 10025)">
+                        <button class="btn btn-success" type="button" id="btn-check-zip">Check Coverage</button>
+                    </div>
+                    <div id="zip-check-result" class="fw-semibold"></div>
+                </div>
+            </div>
+        </section>
+
+        <!-- ==============================================
+             2. MEDICINE CATALOG VIEW
+             ============================================== -->
+        <section id="view-catalog" class="app-view">
+            <div class="container my-5">
+                <div class="row align-items-end g-4 mb-5">
+                    <div class="col-lg-6">
+                        <h1 class="display-5 fw-bold mb-2">Medicine Catalog</h1>
+                        <p class="text-secondary mb-0">Find your prescriptions, OTC remedies, vitamins, and healthcare cosmetics.</p>
+                    </div>
+                    <div class="col-lg-6">
+                        <div class="d-flex flex-wrap justify-content-lg-end gap-2">
+                            <!-- Sorting options -->
+                            <select id="catalog-sort" class="form-select w-auto rounded-pill border-color">
+                                <option value="sales-desc">Sort by: Popularity</option>
+                                <option value="price-asc">Price: Low to High</option>
+                                <option value="price-desc">Price: High to Low</option>
+                                <option value="rating-desc">Rating: High to Low</option>
+                                <option value="name-asc">Alphabetical: A-Z</option>
+                            </select>
+                            <!-- Search filter in catalog -->
+                            <input type="text" id="catalog-search" class="form-control w-auto rounded-pill border-color" placeholder="Filter medicines...">
+                        </div>
+                    </div>
+                </div>
+
+                <div class="row g-4">
+                    <!-- Filters Sidebar -->
+                    <div class="col-lg-3">
+                        <div class="custom-card p-4 sticky-top" style="top: 100px;">
+                            <h5 class="fw-bold mb-4"><i class="fa-solid fa-filter text-primary me-2"></i> Categories</h5>
+                            <div class="d-flex flex-column gap-2">
+                                <button class="btn btn-light text-start py-2 px-3 rounded-pill filter-cat-btn active" data-category="All">
+                                    All Categories <span class="badge bg-secondary float-end" id="count-all-meds">50</span>
+                                </button>
+                                <button class="btn btn-light text-start py-2 px-3 rounded-pill filter-cat-btn" data-category="Prescription">
+                                    Prescription <span class="badge bg-danger-subtle text-danger float-end" id="count-rx-meds">15</span>
+                                </button>
+                                <button class="btn btn-light text-start py-2 px-3 rounded-pill filter-cat-btn" data-category="OTC">
+                                    OTC Drugs <span class="badge bg-primary-subtle text-primary float-end" id="count-otc-meds">15</span>
+                                </button>
+                                <button class="btn btn-light text-start py-2 px-3 rounded-pill filter-cat-btn" data-category="Wellness">
+                                    Wellness <span class="badge bg-success-subtle text-success float-end" id="count-wellness-meds">10</span>
+                                </button>
+                                <button class="btn btn-light text-start py-2 px-3 rounded-pill filter-cat-btn" data-category="Personal Care">
+                                    Personal Care <span class="badge bg-info-subtle text-info float-end" id="count-pc-meds">10</span>
+                                </button>
+                            </div>
+
+                            <hr class="my-4">
+
+                            <h5 class="fw-bold mb-3">Availability</h5>
+                            <div class="form-check mb-2">
+                                <input class="form-check-input" type="checkbox" id="filter-stock-only">
+                                <label class="form-check-label text-secondary" for="filter-stock-only">In Stock Only</label>
+                            </div>
+                            <div class="form-check">
+                                <input class="form-check-input" type="checkbox" id="filter-rx-only">
+                                <label class="form-check-label text-secondary" for="filter-rx-only">Prescription Free (OTC/Wellness)</label>
+                            </div>
+                            
+                            <hr class="my-4">
+                            
+                            <!-- Favorite medicines quick filter -->
+                            <button class="btn btn-outline-danger w-100 rounded-pill py-2" id="btn-show-favorites">
+                                <i class="fa-solid fa-heart me-2"></i> Show Favorites
+                            </button>
+                        </div>
+                    </div>
+
+                    <!-- Products Grid -->
+                    <div class="col-lg-9">
+                        <div class="row g-4" id="catalog-grid">
+                            <!-- Loaded dynamically via js/app.js -->
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- ==============================================
+             3. PRODUCT DETAILS PAGE VIEW
+             ============================================== -->
+        <section id="view-product-detail" class="app-view">
+            <div class="container my-5 py-4">
+                <a href="#catalog" class="btn btn-outline-secondary rounded-pill mb-4"><i class="fa-solid fa-arrow-left me-2"></i> Back to Catalog</a>
+                <div class="row g-5 align-items-center" id="product-detail-container">
+                    <!-- Dynamic rendering via js/app.js -->
+                </div>
+
+                <div class="mt-5 pt-5 border-top">
+                    <h3 class="fw-bold mb-4">Related Medicines & Recommendations</h3>
+                    <div class="row g-4" id="related-medicines-grid">
+                        <!-- Related loaded here -->
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- ==============================================
+             4. PRESCRIPTION UPLOAD PORTAL VIEW
+             ============================================== -->
+        <section id="view-prescription" class="app-view">
+            <div class="container my-5">
+                <div class="row justify-content-center">
+                    <div class="col-lg-8 text-center">
+                        <span class="badge bg-danger-subtle text-danger border border-danger-subtle px-3 py-2 rounded-pill fw-semibold mb-3">Rx Verification Portal</span>
+                        <h1 class="display-6 fw-bold mb-3">Upload Medical Prescription</h1>
+                        <p class="text-secondary mx-auto" style="max-width: 600px;">CureSync complies with all healthcare regulations. Upload your doctor's signed prescription to automatically parse and configure your order.</p>
+                        
+                        <!-- Drag and drop zone -->
+                        <div class="drag-drop-zone p-5 my-5 text-center" id="rx-upload-zone">
+                            <input type="file" id="rx-file-input" class="d-none" accept="image/*,.pdf">
+                            <i class="fa-solid fa-cloud-arrow-up text-primary" style="font-size: 4rem;"></i>
+                            <h4 class="fw-bold mt-4">Drag and drop your file here</h4>
+                            <p class="text-secondary small">Supports JPG, PNG, PDF formats up to 5MB</p>
+                            <button class="btn btn-primary rounded-pill px-4 py-2 mt-2" onclick="document.getElementById('rx-file-input').click()">Browse Local Files</button>
+                        </div>
+
+                        <!-- Preview Area -->
+                        <div id="rx-preview-container" class="custom-card p-4 text-start mb-5 d-none">
+                            <h5 class="fw-bold mb-3"><i class="fa-solid fa-eye text-success me-2"></i> Uploaded Document</h5>
+                            <div class="row align-items-center g-4">
+                                <div class="col-md-4 text-center">
+                                    <img src="" id="rx-preview-img" class="img-fluid rounded border shadow-sm" style="max-height: 200px;" alt="Rx Preview">
+                                </div>
+                                <div class="col-md-8">
+                                    <div class="d-flex align-items-center gap-2 mb-2">
+                                        <h6 class="fw-bold mb-0" id="rx-filename">prescription.jpg</h6>
+                                        <span class="badge bg-success-subtle text-success" id="rx-status-badge">Processing...</span>
+                                    </div>
+                                    <!-- Scanning progress simulation -->
+                                    <div class="progress mb-3" style="height: 10px;">
+                                        <div class="progress-bar progress-bar-striped progress-bar-animated bg-success" id="rx-scan-progress" role="progressbar" style="width: 15%"></div>
+                                    </div>
+                                    <div class="d-flex flex-column gap-1 text-secondary small" id="rx-scanned-logs">
+                                        <p class="mb-0 text-success"><i class="fa-solid fa-circle-check"></i> File uploaded successfully.</p>
+                                        <p class="mb-0" id="rx-log-ocr"><i class="fa-solid fa-spinner fa-spin"></i> Running SynXCloud OCR analysis on medical handwriting...</p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Extracted items trigger simulated cart addition -->
+                        <div id="rx-matched-items-box" class="custom-card p-4 text-start d-none">
+                            <h5 class="fw-bold text-success mb-2"><i class="fa-solid fa-wand-magic-sparkles me-2"></i> AI Extracted Medicines</h5>
+                            <p class="text-secondary small mb-4">The following catalog matches were identified from the handwriting scan. Select items to add to cart.</p>
+                            <div class="d-flex flex-column gap-3 mb-4" id="rx-extracted-list">
+                                <!-- Extracted items will render here -->
+                            </div>
+                            <button class="btn btn-success w-100 rounded-pill py-2" id="btn-add-rx-cart">Add Selected Items to Cart & View Checkout</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- ==============================================
+             5. SHOPPING CART VIEW
+             ============================================== -->
+        <section id="view-cart" class="app-view">
+            <div class="container my-5">
+                <h1 class="display-5 fw-bold mb-5"><i class="fa-solid fa-cart-shopping me-2 text-primary"></i> Shopping Cart</h1>
+                <div class="row g-4" id="cart-outer-container">
+                    <!-- Dynamic rendering of items vs empty message via js/app.js -->
+                </div>
+            </div>
+        </section>
+
+        <!-- ==============================================
+             6. CHECKOUT PAGE VIEW
+             ============================================== -->
+        <section id="view-checkout" class="app-view">
+            <div class="container my-5">
+                <h1 class="display-5 fw-bold mb-5"><i class="fa-solid fa-wallet me-2 text-primary"></i> Secure Checkout</h1>
+                <form id="checkout-form" onsubmit="event.preventDefault();">
+                    <div class="row g-4">
+                        <!-- Details Form -->
+                        <div class="col-lg-7">
+                            <div class="custom-card p-4 mb-4">
+                                <h4 class="fw-bold mb-4 text-primary"><i class="fa-solid fa-id-card me-2"></i> Delivery & Contact Details</h4>
+                                <div class="row g-3">
+                                    <div class="col-md-12">
+                                        <label for="checkout-name" class="form-label">Full Name</label>
+                                        <input type="text" id="checkout-name" class="form-control" required>
+                                    </div>
+                                    <div class="col-md-6">
+                                        <label for="checkout-phone" class="form-label">Phone Number</label>
+                                        <input type="tel" id="checkout-phone" class="form-control" required>
+                                    </div>
+                                    <div class="col-md-6">
+                                        <label for="checkout-email" class="form-label">Email Address</label>
+                                        <input type="email" id="checkout-email" class="form-control" required>
+                                    </div>
+                                    <div class="col-md-12">
+                                        <label for="checkout-address" class="form-label">Street Address</label>
+                                        <input type="text" id="checkout-address" class="form-control" required>
+                                    </div>
+                                    <div class="col-md-6">
+                                        <label for="checkout-city" class="form-label">City</label>
+                                        <input type="text" id="checkout-city" class="form-control" required>
+                                    </div>
+                                    <div class="col-md-6">
+                                        <label for="checkout-zip" class="form-label">Zip Code</label>
+                                        <input type="text" id="checkout-zip" class="form-control" required>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <!-- Delivery Slot Selection -->
+                            <div class="custom-card p-4 mb-4">
+                                <h4 class="fw-bold mb-3 text-primary"><i class="fa-solid fa-truck-fast me-2"></i> Delivery Slot</h4>
+                                <p class="text-secondary small mb-4">Choose when you'd like your medicines delivered.</p>
+                                <div class="row g-3">
+                                    <div class="col-md-6">
+                                        <div class="form-check border p-3 rounded shadow-sm">
+                                            <input class="form-check-input ms-0 me-2" type="radio" name="delivery-slot" id="slot-express" value="Express (Within 2 Hours)" checked>
+                                            <label class="form-check-label fw-semibold" for="slot-express">Express Delivery</label>
+                                            <div class="text-success small fw-semibold mt-1">Within 2 Hours</div>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-6">
+                                        <div class="form-check border p-3 rounded shadow-sm">
+                                            <input class="form-check-input ms-0 me-2" type="radio" name="delivery-slot" id="slot-morning" value="Tomorrow Morning (8 AM - 12 PM)">
+                                            <label class="form-check-label fw-semibold" for="slot-morning">Tomorrow Morning</label>
+                                            <div class="text-secondary small mt-1">8:00 AM - 12:00 PM</div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <!-- Payment Method -->
+                            <div class="custom-card p-4">
+                                <h4 class="fw-bold mb-3 text-primary"><i class="fa-solid fa-credit-card me-2"></i> Payment Selection</h4>
+                                <p class="text-secondary small mb-4">Select your preferred payment channel.</p>
+                                <div class="d-flex flex-column gap-3">
+                                    <div class="form-check border p-3 rounded shadow-sm d-flex align-items-center justify-content-between">
+                                        <div>
+                                            <input class="form-check-input ms-0 me-2" type="radio" name="payment-method" id="pay-cod" value="Cash on Delivery" checked>
+                                            <label class="form-check-label fw-semibold" for="pay-cod">Cash / Card on Delivery (COD)</label>
+                                        </div>
+                                        <i class="fa-solid fa-hand-holding-dollar fa-xl text-success"></i>
+                                    </div>
+                                    <div class="form-check border p-3 rounded shadow-sm d-flex align-items-center justify-content-between">
+                                        <div>
+                                            <input class="form-check-input ms-0 me-2" type="radio" name="payment-method" id="pay-upi" value="UPI / Digital Wallet">
+                                            <label class="form-check-label fw-semibold" for="pay-upi">UPI / Digital Wallets</label>
+                                        </div>
+                                        <span class="badge bg-info-subtle text-info border">GooglePay / ApplePay</span>
+                                    </div>
+                                    <div class="form-check border p-3 rounded shadow-sm d-flex align-items-center justify-content-between">
+                                        <div>
+                                            <input class="form-check-input ms-0 me-2" type="radio" name="payment-method" id="pay-card" value="Credit Card">
+                                            <label class="form-check-label fw-semibold" for="pay-card">Credit or Debit Card</label>
+                                        </div>
+                                        <i class="fa-solid fa-credit-card fa-xl text-primary"></i>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Order Summary Card -->
+                        <div class="col-lg-5">
+                            <div class="custom-card p-4 position-sticky" style="top: 100px;">
+                                <h4 class="fw-bold mb-4">Order Summary</h4>
+                                <div id="checkout-summary-items" style="max-height: 200px; overflow-y: auto;">
+                                    <!-- Populated in app.js -->
+                                </div>
+                                <hr>
+                                <div class="d-flex justify-content-between mb-2">
+                                    <span class="text-secondary">Subtotal</span>
+                                    <span class="fw-semibold" id="checkout-subtotal">$0.00</span>
+                                </div>
+                                <div class="d-flex justify-content-between mb-2">
+                                    <span class="text-secondary">Delivery Fee</span>
+                                    <span class="fw-semibold" id="checkout-delivery">$0.00</span>
+                                </div>
+                                <div class="d-flex justify-content-between mb-2 text-danger d-none" id="checkout-discount-row">
+                                    <span>Discount Applied</span>
+                                    <span class="fw-semibold" id="checkout-discount">-$0.00</span>
+                                </div>
+                                <hr>
+                                <div class="d-flex justify-content-between align-items-center mb-4">
+                                    <span class="fw-bold fs-5">Grand Total</span>
+                                    <span class="fw-extrabold fs-4 text-success" id="checkout-total">$0.00</span>
+                                </div>
+                                
+                                <div class="alert alert-success d-flex align-items-center gap-2 py-2" role="alert" style="border-radius: 8px;">
+                                    <i class="fa-solid fa-coins"></i>
+                                    <small class="fw-semibold">Loyalty cashback earned: <span id="checkout-points">0</span> points</small>
+                                </div>
+
+                                <div id="checkout-rx-warning" class="alert alert-warning d-flex align-items-start gap-2 py-2 d-none" role="alert" style="border-radius: 8px;">
+                                    <i class="fa-solid fa-triangle-exclamation mt-1"></i>
+                                    <div>
+                                        <small class="fw-semibold d-block">Prescription Required</small>
+                                        <small class="text-secondary" style="font-size: 0.75rem;">Your cart contains Rx items. Upload validation is active.</small>
+                                    </div>
+                                </div>
+
+                                <button type="submit" class="btn btn-success btn-lg w-100 rounded-pill mt-3 py-2 shadow-sm" id="btn-submit-order">Place Order</button>
+                            </div>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </section>
+
+        <!-- ==============================================
+             7. CUSTOMER DASHBOARD VIEW
+             ============================================== -->
+        <section id="view-dashboard" class="app-view">
+            <div class="container my-5">
+                <div class="row g-4 align-items-start">
+                    <!-- Dashboard Sidebar (Profile Summary) -->
+                    <div class="col-lg-4">
+                        <div class="custom-card p-4 text-center">
+                            <img src="https://api.dicebear.com/7.x/adventurer/svg?seed=John" id="dash-avatar" class="rounded-circle border mb-3 shadow-sm" width="100" height="100" alt="Avatar">
+                            <h4 class="fw-bold mb-1" id="dash-user-name">Loading...</h4>
+                            <p class="text-secondary small mb-4" id="dash-user-email">email@example.com</p>
+                            
+                            <!-- Loyalty System -->
+                            <div class="p-3 bg-success-subtle text-success rounded-4 border border-success-subtle mb-4">
+                                <i class="fa-solid fa-coins fa-2x mb-2"></i>
+                                <h6 class="fw-bold mb-1">Loyalty Points Balance</h6>
+                                <h3 class="fw-extrabold mb-0" id="dash-loyalty-points">0</h3>
+                                <small class="text-secondary d-block mt-1">Equivalent to $<span id="dash-loyalty-cash">0.00</span> store credit</small>
+                            </div>
+
+                            <div class="text-start mb-4">
+                                <h6 class="fw-bold mb-2">Contact Details</h6>
+                                <p class="text-secondary small mb-1"><i class="fa-solid fa-phone text-muted me-2"></i> <span id="dash-phone">---</span></p>
+                                <p class="text-secondary small"><i class="fa-solid fa-location-dot text-muted me-2"></i> <span id="dash-address">---</span></p>
+                            </div>
+                            
+                            <button class="btn btn-outline-primary w-100 rounded-pill btn-sm" id="btn-edit-profile-mock">
+                                <i class="fa-solid fa-pen me-2"></i> Edit Account Info
+                            </button>
+                        </div>
+                    </div>
+
+                    <!-- Dashboard Main Panel (Order History & Prescription files) -->
+                    <div class="col-lg-8">
+                        <!-- Navigation Tabs inside Dashboard -->
+                        <div class="custom-card p-4">
+                            <ul class="nav nav-pills gap-2 mb-4" id="pills-tab" role="tablist">
+                                <li class="nav-item" role="presentation">
+                                    <button class="nav-link active rounded-pill px-4" id="pills-orders-tab" data-bs-toggle="pill" data-bs-target="#pills-orders" type="button" role="tab">Previous Orders</button>
+                                </li>
+                                <li class="nav-item" role="presentation">
+                                    <button class="nav-link rounded-pill px-4" id="pills-prescriptions-tab" data-bs-toggle="pill" data-bs-target="#pills-prescriptions" type="button" role="tab">Prescription History</button>
+                                </li>
+                            </ul>
+                            
+                            <div class="tab-content" id="pills-tabContent">
+                                <!-- Previous Orders -->
+                                <div class="tab-pane fade show active" id="pills-orders" role="tabpanel">
+                                    <h5 class="fw-bold mb-3">Order History</h5>
+                                    <div class="d-flex flex-column gap-3" id="dash-orders-list">
+                                        <!-- Populated dynamically via js/app.js -->
+                                    </div>
+                                </div>
+                                
+                                <!-- Prescriptions History -->
+                                <div class="tab-pane fade" id="pills-prescriptions" role="tabpanel">
+                                    <h5 class="fw-bold mb-3">Stored Prescriptions</h5>
+                                    <div class="row g-3" id="dash-rx-list">
+                                        <!-- Loaded dynamically -->
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- ==============================================
+             8. ORDER TRACKING PAGE VIEW
+             ============================================== -->
+        <section id="view-tracking" class="app-view">
+            <div class="container my-5">
+                <a href="#dashboard" class="btn btn-outline-secondary rounded-pill mb-4"><i class="fa-solid fa-arrow-left me-2"></i> Back to Dashboard</a>
+                
+                <div class="row justify-content-center">
+                    <div class="col-lg-8">
+                        <div class="custom-card p-5">
+                            <div class="d-flex flex-wrap justify-content-between align-items-center gap-3 mb-5 border-bottom pb-4">
+                                <div>
+                                    <small class="text-secondary text-uppercase fw-bold">Order Tracking</small>
+                                    <h2 class="fw-extrabold mb-0" id="tracking-order-id">ORD-1000</h2>
+                                </div>
+                                <div class="text-lg-end">
+                                    <span class="badge bg-primary fs-6 py-2 px-3 rounded-pill" id="tracking-status-badge">Processing</span>
+                                </div>
+                            </div>
+
+                            <!-- Animated progress timeline -->
+                            <div class="timeline-steps my-5">
+                                <div class="timeline-progress-bar" id="tracking-bar"></div>
+                                <div class="timeline-step" id="step-Ordered">
+                                    <div class="timeline-icon-box"><i class="fa-solid fa-file-invoice-dollar"></i></div>
+                                    <div class="timeline-label">Ordered</div>
+                                </div>
+                                <div class="timeline-step" id="step-Verified">
+                                    <div class="timeline-icon-box"><i class="fa-solid fa-shield-check"></i></div>
+                                    <div class="timeline-label">Verified</div>
+                                </div>
+                                <div class="timeline-step" id="step-Packed">
+                                    <div class="timeline-icon-box"><i class="fa-solid fa-box-open"></i></div>
+                                    <div class="timeline-label">Packed</div>
+                                </div>
+                                <div class="timeline-step" id="step-Out-for-Delivery">
+                                    <div class="timeline-icon-box"><i class="fa-solid fa-truck-fast"></i></div>
+                                    <div class="timeline-label">Out for Delivery</div>
+                                </div>
+                                <div class="timeline-step" id="step-Delivered">
+                                    <div class="timeline-icon-box"><i class="fa-solid fa-circle-check"></i></div>
+                                    <div class="timeline-label">Delivered</div>
+                                </div>
+                            </div>
+
+                            <!-- Delivery estimated time calculations -->
+                            <div class="alert alert-info d-flex align-items-center gap-3 py-3 rounded-4 mb-5" role="alert">
+                                <i class="fa-solid fa-clock fa-2x text-primary"></i>
+                                <div>
+                                    <h6 class="fw-bold mb-0">Delivery Estimate</h6>
+                                    <small class="text-secondary" id="tracking-est-text">Within 2 Hours (Standard Slot)</small>
+                                </div>
+                            </div>
+
+                            <h5 class="fw-bold mb-3">Order Items</h5>
+                            <div class="list-group list-group-flush mb-4" id="tracking-items-list">
+                                <!-- Loaded dynamically -->
+                            </div>
+
+                            <!-- Reorder / Repeat Order -->
+                            <button class="btn btn-success w-100 rounded-pill py-2 fw-semibold" id="btn-tracking-reorder">
+                                <i class="fa-solid fa-rotate-right me-2"></i> Repeat This Order
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- ==============================================
+             9. ADMIN DASHBOARD VIEW
+             ============================================== -->
+        <section id="view-admin" class="app-view">
+            <div class="container my-5">
+                <div class="row g-4">
+                    <!-- Admin Sidebar Menu -->
+                    <div class="col-lg-3">
+                        <div class="custom-card p-4 sticky-top" style="top: 100px;">
+                            <h5 class="fw-bold mb-4 text-primary"><i class="fa-solid fa-screwdriver-wrench me-2"></i> SynXCloud CRM</h5>
+                            <div class="d-flex flex-column gap-2">
+                                <button class="admin-nav-link text-start active" data-admin-panel="dashboard-panel">
+                                    <i class="fa-solid fa-chart-line"></i> Dashboard
+                                </button>
+                                <button class="admin-nav-link text-start" data-admin-panel="orders-panel">
+                                    <i class="fa-solid fa-receipt"></i> Orders Manager
+                                </button>
+                                <button class="admin-nav-link text-start" data-admin-panel="inventory-panel">
+                                    <i class="fa-solid fa-warehouse"></i> Inventory Manager
+                                </button>
+                                <button class="admin-nav-link text-start" data-admin-panel="customers-panel">
+                                    <i class="fa-solid fa-users"></i> Customer CRM
+                                </button>
+                                <button class="admin-nav-link text-start" data-admin-panel="analytics-panel">
+                                    <i class="fa-solid fa-chart-pie"></i> Visual Analytics
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Admin Content Panels -->
+                    <div class="col-lg-9">
+                        <!-- Panel A: Admin Summary Dashboard -->
+                        <div id="admin-dashboard-panel" class="admin-panel-view active-panel">
+                            <h2 class="fw-bold mb-4">CureSync Business Intelligence</h2>
+                            
+                            <!-- KPI metrics cards -->
+                            <div class="row g-4 mb-5">
+                                <div class="col-md-3 col-sm-6">
+                                    <div class="custom-card p-4 admin-card-metric metric-sales">
+                                        <small class="text-muted text-uppercase fw-semibold">Total Revenue</small>
+                                        <h3 class="fw-extrabold text-success mt-2" id="kpi-revenue">$0.00</h3>
+                                    </div>
+                                </div>
+                                <div class="col-md-3 col-sm-6">
+                                    <div class="custom-card p-4 admin-card-metric metric-orders">
+                                        <small class="text-muted text-uppercase fw-semibold">Total Orders</small>
+                                        <h3 class="fw-extrabold text-primary mt-2" id="kpi-orders">0</h3>
+                                    </div>
+                                </div>
+                                <div class="col-md-3 col-sm-6">
+                                    <div class="custom-card p-4 admin-card-metric">
+                                        <small class="text-muted text-uppercase fw-semibold">Customers CRM</small>
+                                        <h3 class="fw-extrabold text-info mt-2" id="kpi-customers">0</h3>
+                                    </div>
+                                </div>
+                                <div class="col-md-3 col-sm-6">
+                                    <div class="custom-card p-4 admin-card-metric metric-warnings">
+                                        <small class="text-muted text-uppercase fw-semibold">Low Stock Items</small>
+                                        <h3 class="fw-extrabold text-warning mt-2" id="kpi-low-stock">0</h3>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="row g-4">
+                                <div class="col-lg-7">
+                                    <div class="custom-card p-4">
+                                        <h5 class="fw-bold mb-3">Recent Orders Activity</h5>
+                                        <div class="table-responsive">
+                                            <table class="table table-hover">
+                                                <thead>
+                                                    <tr>
+                                                        <th>ID</th>
+                                                        <th>Customer</th>
+                                                        <th>Total</th>
+                                                        <th>Status</th>
+                                                        <th>Action</th>
+                                                    </tr>
+                                                </thead>
+                                                <tbody id="admin-recent-orders">
+                                                    <!-- Dynamic rows -->
+                                                </tbody>
+                                            </table>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-lg-5">
+                                    <div class="custom-card p-4">
+                                        <h5 class="fw-bold mb-3">Quick Actions</h5>
+                                        <div class="d-flex flex-column gap-2">
+                                            <button class="btn btn-outline-primary text-start rounded-pill py-2" onclick="document.querySelector('[data-admin-panel=inventory-panel]').click(); $('#addMedModal').modal('show');">
+                                                <i class="fa-solid fa-circle-plus text-primary me-2"></i> Add New Medicine
+                                            </button>
+                                            <a href="#prescription" class="btn btn-outline-danger text-start rounded-pill py-2">
+                                                <i class="fa-solid fa-file-prescription text-danger me-2"></i> Process Prescription Scan
+                                            </a>
+                                            <button class="btn btn-outline-success text-start rounded-pill py-2" id="btn-seed-new-order">
+                                                <i class="fa-solid fa-cart-arrow-down text-success me-2"></i> Simulate Guest Order
+                                            </button>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Panel B: Orders Status Management -->
+                        <div id="admin-orders-panel" class="admin-panel-view d-none">
+                            <h2 class="fw-bold mb-4">Orders Manager</h2>
+                            <div class="custom-card p-4">
+                                <div class="table-responsive">
+                                    <table class="table align-middle table-hover">
+                                        <thead>
+                                            <tr>
+                                                <th>ID</th>
+                                                <th>Customer</th>
+                                                <th>Date</th>
+                                                <th>Items</th>
+                                                <th>Grand Total</th>
+                                                <th>Prescription</th>
+                                                <th>Status</th>
+                                                <th>Status Update</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody id="admin-full-orders-list">
+                                            <!-- Loaded dynamically -->
+                                        </tbody>
+                                    </table>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Panel C: Inventory Management Module -->
+                        <div id="admin-inventory-panel" class="admin-panel-view d-none">
+                            <div class="d-flex justify-content-between align-items-center mb-4">
+                                <h2 class="fw-bold mb-0">Inventory Catalog</h2>
+                                <button class="btn btn-primary rounded-pill px-4" data-bs-toggle="modal" data-bs-target="#addMedModal">
+                                    <i class="fa-solid fa-plus me-1"></i> Add Medicine
+                                </button>
+                            </div>
+                            
+                            <div class="custom-card p-4">
+                                <div class="table-responsive">
+                                    <table class="table align-middle table-hover">
+                                        <thead>
+                                            <tr>
+                                                <th>Medicine</th>
+                                                <th>Category</th>
+                                                <th>Price</th>
+                                                <th>Stock Quantity</th>
+                                                <th>Rx Required</th>
+                                                <th>Status</th>
+                                                <th>Actions</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody id="admin-inventory-list">
+                                            <!-- Dynamically populated -->
+                                        </tbody>
+                                    </table>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Panel D: Customer CRM Management -->
+                        <div id="admin-customers-panel" class="admin-panel-view d-none">
+                            <h2 class="fw-bold mb-4">Customer CRM</h2>
+                            <div class="custom-card p-4">
+                                <div class="table-responsive">
+                                    <table class="table align-middle table-hover">
+                                        <thead>
+                                            <tr>
+                                                <th>Avatar</th>
+                                                <th>Name</th>
+                                                <th>Contact Info</th>
+                                                <th>Loyalty Points</th>
+                                                <th>Default Address</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody id="admin-customer-crm-list">
+                                            <!-- Loaded dynamically -->
+                                        </tbody>
+                                    </table>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Panel E: Analytics & Chart.js Integration -->
+                        <div id="admin-analytics-panel" class="admin-panel-view d-none">
+                            <h2 class="fw-bold mb-4">Performance & Data Trends</h2>
+                            <div class="row g-4 mb-4">
+                                <div class="col-md-6">
+                                    <div class="custom-card p-4">
+                                        <h5 class="fw-bold mb-3 text-secondary">Monthly Revenue Growth</h5>
+                                        <div style="position: relative; height:280px; width:100%">
+                                            <canvas id="chart-revenue"></canvas>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-md-6">
+                                    <div class="custom-card p-4">
+                                        <h5 class="fw-bold mb-3 text-secondary">Sales Split by Category</h5>
+                                        <div style="position: relative; height:280px; width:100%">
+                                            <canvas id="chart-category"></canvas>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row g-4">
+                                <div class="col-md-12">
+                                    <div class="custom-card p-4">
+                                        <h5 class="fw-bold mb-3 text-secondary">Top-Selling Products (Units Sold)</h5>
+                                        <div style="position: relative; height:300px; width:100%">
+                                            <canvas id="chart-products"></canvas>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- ==============================================
+             10. BUSINESS PRESENTATION SECTION
+             ============================================== -->
+        <section id="view-why-digital" class="app-view">
+            <div class="container my-5 py-4">
+                <div class="row justify-content-center">
+                    <div class="col-lg-10 text-center mb-5">
+                        <span class="why-digital-badge px-3 py-2 fs-6 mb-3">Enterprise Presentation</span>
+                        <h1 class="display-5 fw-extrabold lh-sm">Why CureSync Needs Digital Transformation</h1>
+                        <p class="lead text-secondary mx-auto" style="max-width: 700px;">Moving from manual WhatsApp chats and scanned PDF orders to a complete automated medicine e-commerce and CRM platform.</p>
+                    </div>
+                </div>
+
+                <div class="row g-5 align-items-center mb-5">
+                    <div class="col-lg-6">
+                        <h3 class="fw-bold text-danger mb-4"><i class="fa-solid fa-skull-crossbones me-2"></i> The Cost of "WhatsApp-Only" Ordering</h3>
+                        <div class="d-flex flex-column gap-3">
+                            <div class="d-flex align-items-start gap-3">
+                                <span class="p-2 bg-danger-subtle text-danger rounded-circle mt-1"><i class="fa-solid fa-triangle-exclamation"></i></span>
+                                <div>
+                                    <h6 class="fw-bold mb-1">Manual Handwriting Transcription Errors</h6>
+                                    <small class="text-secondary">Pharmacists manually decode blurry prescriptions, risking incorrect drug name mapping and dosages.</small>
+                                </div>
+                            </div>
+                            <div class="d-flex align-items-start gap-3">
+                                <span class="p-2 bg-danger-subtle text-danger rounded-circle mt-1"><i class="fa-solid fa-clock"></i></span>
+                                <div>
+                                    <h6 class="fw-bold mb-1">Inefficient Back-and-Forth Chatting</h6>
+                                    <small class="text-secondary">A single order takes 15-20 minutes of chat time to check inventory, verify address, calculate delivery costs, and confirm payment details.</small>
+                                </div>
+                            </div>
+                            <div class="d-flex align-items-start gap-3">
+                                <span class="p-2 bg-danger-subtle text-danger rounded-circle mt-1"><i class="fa-solid fa-chart-line-down"></i></span>
+                                <div>
+                                    <h6 class="fw-bold mb-1">Zero Analytics & Low Inventory Visibility</h6>
+                                    <small class="text-secondary">No automated alerts for low stock levels. No analytics on customer preferences or seasonal revenue trends.</small>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-lg-6">
+                        <div class="custom-card p-4 bg-danger-subtle border-danger border-2 text-danger">
+                            <h4 class="fw-bold mb-3"><i class="fa-solid fa-chart-pie me-2"></i> Scale Limitations</h4>
+                            <p class="small text-secondary mb-0">With WhatsApp-only pipelines, a single pharmacist can only process 15-20 orders a day. Operational overhead balloons during peak season. CureSync fails to scale because there is no structured catalog matching, order queuing, or tracking timeline.</p>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="row g-5 align-items-center py-5 border-top">
+                    <div class="col-lg-6 order-lg-2">
+                        <h3 class="fw-bold text-success mb-4"><i class="fa-solid fa-circle-check me-2"></i> The SynXCloud Digital Architecture</h3>
+                        <div class="d-flex flex-column gap-3">
+                            <div class="why-digital-benefit">
+                                <h6 class="fw-bold mb-1">Digital Prescription Portals (OCR Powered)</h6>
+                                <p class="text-secondary small mb-0">Patients upload prescriptions. Automated catalog matches isolate medicines, allowing checkout in 2 minutes.</p>
+                            </div>
+                            <div class="why-digital-benefit">
+                                <h6 class="fw-bold mb-1">Interactive Delivery Timeline Tracking</h6>
+                                <p class="text-secondary small mb-0">Replaces text queries like "where is my rider?" with automatic milestone tracking (Packed, Out for Delivery).</p>
+                            </div>
+                            <div class="why-digital-benefit">
+                                <h6 class="fw-bold mb-1">Targeted Loyalty Point Engine</h6>
+                                <p class="text-secondary small mb-0">Boosts customer retention by automatically granting points for every online refill transaction.</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-lg-6 order-lg-1">
+                        <div class="custom-card p-4">
+                            <h4 class="fw-bold text-primary mb-4"><i class="fa-solid fa-gauge-high me-2"></i> Estimated Efficiency Gains</h4>
+                            <div class="row g-3">
+                                <div class="col-6 text-center">
+                                    <h2 class="display-6 fw-extrabold text-success mb-0">+40%</h2>
+                                    <small class="text-secondary">Average Order Size</small>
+                                </div>
+                                <div class="col-6 text-center">
+                                    <h2 class="display-6 fw-extrabold text-success mb-0">-80%</h2>
+                                    <small class="text-secondary">Manual Processing Time</small>
+                                </div>
+                                <div class="col-6 text-center">
+                                    <h2 class="display-6 fw-extrabold text-success mb-0">+35%</h2>
+                                    <small class="text-secondary">Retention Rate</small>
+                                </div>
+                                <div class="col-6 text-center">
+                                    <h2 class="display-6 fw-extrabold text-success mb-0">0%</h2>
+                                    <small class="text-secondary">Transcription Errors</small>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+    </main>
+
+    <!-- --- FOOTER --- -->
+    <footer class="bg-surface border-top mt-5 py-5 text-secondary">
+        <div class="container">
+            <div class="row g-4">
+                <div class="col-lg-4 col-md-6">
+                    <h5 class="fw-bold text-primary mb-3">Cure<span class="text-success">Sync</span></h5>
+                    <p class="small text-secondary">Modern healthcare-themed prescription catalog, pharmacy management, and digital customer engagement platform demo.</p>
+                    <div class="d-flex gap-2">
+                        <a href="#" class="btn btn-sm btn-outline-secondary rounded-circle"><i class="fa-brands fa-facebook-f"></i></a>
+                        <a href="#" class="btn btn-sm btn-outline-secondary rounded-circle"><i class="fa-brands fa-twitter"></i></a>
+                        <a href="#" class="btn btn-sm btn-outline-secondary rounded-circle"><i class="fa-brands fa-linkedin-in"></i></a>
+                    </div>
+                </div>
+                <div class="col-lg-2 col-md-3">
+                    <h6 class="fw-bold text-primary mb-3">Store Link</h6>
+                    <ul class="list-unstyled d-flex flex-column gap-2 small">
+                        <li><a href="#catalog" class="text-decoration-none text-secondary">Medicine Catalog</a></li>
+                        <li><a href="#prescription" class="text-decoration-none text-secondary">Upload Portal</a></li>
+                        <li><a href="#cart" class="text-decoration-none text-secondary">Shopping Cart</a></li>
+                    </ul>
+                </div>
+                <div class="col-lg-2 col-md-3">
+                    <h6 class="fw-bold text-primary mb-3">Enterprise</h6>
+                    <ul class="list-unstyled d-flex flex-column gap-2 small">
+                        <li><a href="#admin" class="text-decoration-none text-secondary">Admin Console</a></li>
+                        <li><a href="#why-digital" class="text-decoration-none text-secondary">Why Digital Transformation</a></li>
+                    </ul>
+                </div>
+                <div class="col-lg-4 col-md-6">
+                    <h6 class="fw-bold text-primary mb-3">Contact Support</h6>
+                    <p class="small mb-1"><i class="fa-solid fa-envelope me-2"></i> support@curesync.synxcloud.com</p>
+                    <p class="small mb-1"><i class="fa-solid fa-phone me-2"></i> +1 (555) CURE-SYNC</p>
+                    <p class="small"><i class="fa-solid fa-location-dot me-2"></i> 101 Doctor Row, New York, NY 10001</p>
+                </div>
+            </div>
+            
+            <hr class="my-4">
+            
+            <div class="row align-items-center g-3 small">
+                <div class="col-md-6 text-center text-md-start">
+                    &copy; 2026 CureSync. All rights reserved.
+                </div>
+                <div class="col-md-6 text-center text-md-end">
+                    <span>Developed by </span>
+                    <a href="https://synxcloud.com" target="_blank" class="fw-bold text-decoration-none text-primary">
+                        <i class="fa-solid fa-cloud me-1"></i>SynXCloud
+                    </a>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <!-- --- MODALS & FLOATING CONTROLS --- -->
+
+    <!-- Floating WhatsApp Integration Button -->
+    <a href="#" target="_blank" class="whatsapp-float" id="btn-whatsapp-chat" title="Send Order Details to WhatsApp">
+        <i class="fa-brands fa-whatsapp"></i>
+    </a>
+
+    <!-- Custom Toast Notification Container -->
+    <div class="toast-container-custom" id="toast-container"></div>
+
+    <!-- Voice Search Simulation Modal -->
+    <div class="modal fade" id="voiceSearchModal" tabindex="-1" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered">
+            <div class="modal-content glass-panel border-0" style="border-radius: 20px;">
+                <div class="modal-header border-0 pb-0">
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body text-center p-5">
+                    <h4 class="fw-bold mb-3" id="voice-modal-title">Listening for Medicine...</h4>
+                    <p class="text-secondary small mb-4" id="voice-modal-desc">Speak clearly into your microphone to search.</p>
+                    
+                    <div class="voice-waves mb-4" id="voice-waves-container">
+                        <div class="voice-wave-bar"></div>
+                        <div class="voice-wave-bar"></div>
+                        <div class="voice-wave-bar"></div>
+                        <div class="voice-wave-bar"></div>
+                        <div class="voice-wave-bar"></div>
+                    </div>
+
+                    <button class="btn btn-outline-danger rounded-pill px-4" id="btn-stop-voice"><i class="fa-solid fa-microphone-slash me-2"></i> Stop Recording</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Add/Edit Medicine Modal (Inventory Management) -->
+    <div class="modal fade" id="addMedModal" tabindex="-1" aria-labelledby="addMedModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered">
+            <div class="modal-content border-0 shadow-lg" style="border-radius: 20px; background-color: var(--bg-surface);">
+                <div class="modal-header border-0">
+                    <h5 class="modal-title fw-bold" id="addMedModalLabel">Add New Medicine</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <form id="admin-add-med-form" onsubmit="event.preventDefault();">
+                    <div class="modal-body py-4">
+                        <input type="hidden" id="form-med-id">
+                        <div class="row g-3">
+                            <div class="col-md-12">
+                                <label for="form-med-name" class="form-label">Medicine Name</label>
+                                <input type="text" id="form-med-name" class="form-control" required placeholder="e.g. Paracetamol 500mg">
+                            </div>
+                            <div class="col-md-6">
+                                <label for="form-med-brand" class="form-label">Brand</label>
+                                <input type="text" id="form-med-brand" class="form-control" required placeholder="e.g. Tylenol">
+                            </div>
+                            <div class="col-md-6">
+                                <label for="form-med-category" class="form-label">Category</label>
+                                <select id="form-med-category" class="form-select" required>
+                                    <option value="Prescription">Prescription</option>
+                                    <option value="OTC">OTC</option>
+                                    <option value="Wellness">Wellness</option>
+                                    <option value="Personal Care">Personal Care</option>
+                                </select>
+                            </div>
+                            <div class="col-md-4">
+                                <label for="form-med-price" class="form-label">Price ($)</label>
+                                <input type="number" id="form-med-price" class="form-control" step="0.01" required placeholder="0.00">
+                            </div>
+                            <div class="col-md-4">
+                                <label for="form-med-stock" class="form-label">Stock Qty</label>
+                                <input type="number" id="form-med-stock" class="form-control" required placeholder="0">
+                            </div>
+                            <div class="col-md-4">
+                                <label for="form-med-unit" class="form-label">Unit Size</label>
+                                <input type="text" id="form-med-unit" class="form-control" required placeholder="e.g. 30 Tablets">
+                            </div>
+                            <div class="col-md-12">
+                                <div class="form-check">
+                                    <input class="form-check-input" type="checkbox" id="form-med-rx">
+                                    <label class="form-check-label text-secondary fw-semibold" for="form-med-rx">Prescription Required (Rx)</label>
+                                </div>
+                            </div>
+                            <div class="col-md-12">
+                                <label for="form-med-desc" class="form-label">Description</label>
+                                <textarea id="form-med-desc" class="form-control" rows="2" placeholder="Describe medication uses..."></textarea>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="modal-footer border-0">
+                        <button type="button" class="btn btn-light rounded-pill px-4" data-bs-dismiss="modal">Cancel</button>
+                        <button type="submit" class="btn btn-primary rounded-pill px-4" id="btn-save-medicine">Save Product</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+
+    <!-- --- SCRIPTS --- -->
+    <!-- Bootstrap JS Bundle -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    <!-- Chart.js -->
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    
+    <!-- Application Scripts -->
+    <script src="js/data.js"></script>
+    <script src="js/store.js"></script>
+    <script src="js/router.js"></script>
+    <script src="js/components.js"></script>
+    <script src="js/app.js"></script>
+</body>
+</html>
