@@ -67,6 +67,7 @@ const CureSyncApp = {
 
         const applyTheme = (theme) => {
             html.setAttribute("data-theme", theme);
+            html.setAttribute("data-bs-theme", theme);
             if (theme === "dark") {
                 toggleBtn.innerHTML = `<i class="fa-solid fa-sun text-warning"></i>`;
             } else {

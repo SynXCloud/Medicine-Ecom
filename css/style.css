@@ -591,3 +591,132 @@ h1, h2, h3, h4, h5, h6 {
         margin-top: 12px;
     }
 }
+
+/* --- COMPREHENSIVE DARK MODE CONTRAST & VISIBILITY OVERRIDES --- */
+[data-theme="dark"], [data-bs-theme="dark"] {
+    --text-secondary: #cbd5e1;
+    --text-muted: #94a3b8;
+}
+
+[data-theme="dark"] .text-secondary,
+[data-bs-theme="dark"] .text-secondary {
+    color: var(--text-secondary) !important;
+}
+
+[data-theme="dark"] .text-muted,
+[data-bs-theme="dark"] .text-muted {
+    color: var(--text-muted) !important;
+}
+
+[data-theme="dark"] .text-dark,
+[data-bs-theme="dark"] .text-dark {
+    color: var(--text-primary) !important;
+}
+
+[data-theme="dark"] .bg-light,
+[data-bs-theme="dark"] .bg-light {
+    background-color: var(--bg-surface) !important;
+}
+
+[data-theme="dark"] .bg-light-subtle,
+[data-bs-theme="dark"] .bg-light-subtle {
+    background-color: #0c1220 !important;
+    border-color: var(--border-color) !important;
+}
+
+[data-theme="dark"] .nav-link,
+[data-bs-theme="dark"] .nav-link {
+    color: var(--text-secondary) !important;
+}
+
+[data-theme="dark"] .nav-link:hover,
+[data-theme="dark"] .nav-link.active,
+[data-bs-theme="dark"] .nav-link:hover,
+[data-bs-theme="dark"] .nav-link.active {
+    color: var(--primary-color) !important;
+}
+
+/* Fix outlined button readability */
+[data-theme="dark"] .btn-outline-secondary,
+[data-bs-theme="dark"] .btn-outline-secondary {
+    color: var(--text-secondary) !important;
+    border-color: var(--border-color) !important;
+}
+[data-theme="dark"] .btn-outline-secondary:hover,
+[data-bs-theme="dark"] .btn-outline-secondary:hover {
+    background-color: rgba(255, 255, 255, 0.08) !important;
+    color: var(--text-primary) !important;
+}
+
+/* Fix Admin sidebar buttons style reset */
+.admin-nav-link {
+    background: none !important;
+    border: none !important;
+    width: 100% !important;
+    text-align: left !important;
+}
+
+/* Fix Tables in dark mode */
+[data-theme="dark"] .table,
+[data-bs-theme="dark"] .table {
+    --bs-table-bg: var(--bg-surface) !important;
+    --bs-table-striped-bg: rgba(255, 255, 255, 0.02) !important;
+    --bs-table-color: var(--text-primary) !important;
+    --bs-table-border-color: var(--border-color) !important;
+    color: var(--text-primary) !important;
+}
+[data-theme="dark"] .table td,
+[data-theme="dark"] .table th,
+[data-bs-theme="dark"] .table td,
+[data-bs-theme="dark"] .table th {
+    background-color: var(--bg-surface) !important;
+    color: var(--text-primary) !important;
+    border-color: var(--border-color) !important;
+}
+
+/* Fix badges contrast in dark mode */
+[data-theme="dark"] .bg-success-subtle,
+[data-bs-theme="dark"] .bg-success-subtle {
+    background-color: rgba(16, 185, 129, 0.15) !important;
+    color: #34d399 !important;
+}
+[data-theme="dark"] .bg-danger-subtle,
+[data-bs-theme="dark"] .bg-danger-subtle {
+    background-color: rgba(239, 68, 68, 0.15) !important;
+    color: #f87171 !important;
+}
+[data-theme="dark"] .bg-warning-subtle,
+[data-bs-theme="dark"] .bg-warning-subtle {
+    background-color: rgba(245, 158, 11, 0.15) !important;
+    color: #fbbf24 !important;
+}
+[data-theme="dark"] .bg-info-subtle,
+[data-bs-theme="dark"] .bg-info-subtle {
+    background-color: rgba(59, 130, 246, 0.15) !important;
+    color: #60a5fa !important;
+}
+[data-theme="dark"] .bg-primary-subtle,
+[data-bs-theme="dark"] .bg-primary-subtle {
+    background-color: rgba(56, 189, 248, 0.15) !important;
+    color: #38bdf8 !important;
+}
+
+/* Fix input controls in dark mode */
+[data-theme="dark"] .form-control,
+[data-theme="dark"] .form-select,
+[data-theme="dark"] .input-group-text,
+[data-bs-theme="dark"] .form-control,
+[data-bs-theme="dark"] .form-select,
+[data-bs-theme="dark"] .input-group-text {
+    background-color: rgba(255, 255, 255, 0.05) !important;
+    border-color: var(--border-color) !important;
+    color: var(--text-primary) !important;
+}
+
+/* Fix category label in admin inventory table */
+[data-theme="dark"] .bg-light.text-dark,
+[data-bs-theme="dark"] .bg-light.text-dark {
+    background-color: rgba(255, 255, 255, 0.05) !important;
+    color: var(--text-secondary) !important;
+    border-color: var(--border-color) !important;
+}
