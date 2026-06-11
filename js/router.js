@@ -44,6 +44,13 @@ const CureSyncRouter = {
         const dropdown = document.getElementById("autocomplete-results");
         if (dropdown) dropdown.style.display = "none";
 
+        // Auto-collapse mobile navigation menu on route navigation
+        const navbar = document.getElementById("mainNavbar");
+        if (navbar && navbar.classList.contains("show") && typeof bootstrap !== "undefined") {
+            const bsCollapse = bootstrap.Collapse.getInstance(navbar) || new bootstrap.Collapse(navbar);
+            bsCollapse.hide();
+        }
+
         // Scroll to top of window
         window.scrollTo(0, 0);
 

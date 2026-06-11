@@ -554,3 +554,33 @@ h1, h2, h3, h4, h5, h6 {
         margin-top: 0;
     }
 }
+
+/* mobile responsive navbar enhancements */
+@media (max-width: 991.98px) {
+    .navbar-collapse {
+        max-height: 75vh;
+        overflow-y: auto;
+        padding-bottom: 15px;
+    }
+    
+    .navbar-collapse .dropdown-menu {
+        position: static !important;
+        float: none !important;
+        box-shadow: none !important;
+        background-color: rgba(var(--primary-rgb), 0.04) !important;
+        border: 1px solid var(--border-color) !important;
+        margin: 10px 0 !important;
+        width: 100% !important;
+        min-width: 100% !important;
+    }
+    
+    /* Ensure child dropdown items look nested and fit */
+    .navbar-collapse .dropdown-item {
+        padding-left: 24px !important;
+        color: var(--text-primary) !important;
+    }
+    
+    .navbar-collapse .dropdown-header {
+        padding-left: 24px !important;
+    }
+}
